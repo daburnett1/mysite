@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'unapologeticconservative.biz', 'www.unapologeticconservative.biz', '167.172.159.118']
+ALLOWED_HOSTS = ['127.0.0.1', 'unapologeticconservative.biz', 'www.unapologeticconservative.biz', '167.172.159.118', 'localhost']
 
 SITE_ID = 1
 # Application definition
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PWD'),
@@ -132,7 +132,8 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
+import os
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # E-mail
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
