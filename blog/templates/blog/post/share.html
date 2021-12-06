@@ -9,11 +9,21 @@
       "{{ post.title }}" was successfully sent to {{ form.cleaned_data.to }}.
     </p>
   {% else %}
-    <h1>Share "{{ post.title }}" by e-mail</h1>
-    <form method="post">
+    <!-- h1>Share "{{ post.title }}" by e-mail</h1-->
+    {% load social_share %}
+    <h1>Share "{{ post.title }}"</h1>
+    {% post_to_facebook "{{ post.title }}" "Post to Facebook!" %}
+    {% post_to_twitter "Blog Post: {{object.title}}. Check it out!" "{{ post.title }}" "Post to Twitter" %}
+    {% post_to_gplus "{{ post.title }}" "Post to Google+!" %}
+    {% post_to_linkedin "{{ post.title }}" %}
+    {% send_email object.title "Blog Post: {{object.title}}. Check it out!" "{{ post.title }}" "Share via email" %}
+    {% post_to_whatsapp "{{ post.title }}" "Share via WhatsApp" %}
+    {% save_to_pinterest "{{ post.title }}" %}
+    {% add_pinterest_script %} <!--// Required for save_to_pinterest. Add to the end of body tag.-->
+    <!--form method="post">
       {{ form.as_p }}
       {% csrf_token %}
       <input type="submit" value="Send e-mail">
-    </form>
+    </form-->
   {% endif %}
 {% endblock %}
